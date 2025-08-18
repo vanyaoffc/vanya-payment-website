@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanya Paymeny Page</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://files.catbox.moe/59p2nb.jpg') no-repeat center center/cover;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }
+    .card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .method {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      margin: 12px 0;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.12);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .method:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+    .method span {
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .account {
+      margin-top: 22px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .copy-btn {
+      margin-top: 14px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+    }
+    .qris img {
+      width: 240px;
+      border-radius: 16px;
+      margin-top: 16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="card">
+    <h2>Pilih Metode Pembayaran</h2><div class="method" onclick="showAccount('DANA', '087836003228')">
+  <span>DANA</span>
+  <span>›</span>
+</div>
+
+<div class="method" onclick="showAccount('GOPAY', '087714737838')">
+  <span>GOPAY</span>
+  <span>›</span>
+</div>
+
+<div class="method" onclick="showAccount('OVO', '081233126227')">
+  <span>OVO</span>
+  <span>›</span>
+</div>
+
+<div class="method" onclick="showQRIS()">
+  <span>QRIS</span>
+  <span>›</span>
+</div>
+
+<div class="account" id="account"></div>
+<button class="copy-btn" id="copyBtn" style="display:none;" onclick="copyText()">Salin Nomor</button>
+<div class="qris" id="qris" style="display:none;">
+  <img src="https://files.catbox.moe/bxju6n.jpg" alt="QRIS">
+</div>
+
+  </div>  <script>
+    let currentText = '';
+
+    function showAccount(name, number) {
+      document.getElementById('account').innerText = name + ': ' + number;
+      document.getElementById('account').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'inline-block';
+      document.getElementById('qris').style.display = 'none';
+      currentText = number;
+    }
+
+    function showQRIS() {
+      document.getElementById('account').innerText = 'Scan QRIS di bawah:';
+      document.getElementById('account').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'none';
+      document.getElementById('qris').style.display = 'block';
+      currentText = '';
+    }
+
+    function copyText() {
+      if (currentText) {
+        navigator.clipboard.writeText(currentText);
+        alert('Nomor berhasil disalin: ' + currentText);
+      }
+    }
+  </script></body>
+</html>
